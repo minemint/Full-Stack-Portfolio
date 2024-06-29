@@ -1,0 +1,6 @@
+@DotnetStockAPI_HostAddress = http://localhost:5124/api
+
+GET {{DotnetStockAPI_HostAddress}}/Authenticate/testconnectdb
+Accept: application/json
+
+###
