@@ -1,0 +1,55 @@
+<mat-toolbar color="primary"
+    class="flex flex-row">
+    <mat-toolbar-row>
+        <!-- toggle button -->
+        @if (isOpened) {
+            <button mat-icon-button
+                (click)="onToggleSidenav()"
+                aria-label="Menu Toggle">
+                <mat-icon>menu</mat-icon>
+            </button>
+        }
+
+        <div class="mat-body1">V {{ version }}</div>
+
+        <!-- center title -->
+        <div style="flex: 0.9"></div>
+        <div class="mat-body2">
+            Angular {{ pageName }}
+        </div>
+        <div style="flex: 1"></div>
+
+        <div class="flex flex-col my-2 text-end">
+            <span class="text-sm line-clamp-1">{{ userProfile.username }}</span>
+            <span class="text-sm line-clamp-1">{{ userProfile.email }}</span>
+        </div>
+
+        <!-- logout button -->
+        <div class="mt-2">
+            <button [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+                class="ml-auto bg-transparent border-none cursor-pointer">
+                <img height="40"
+                    width="40"
+                    [src]=""
+                    alt=""
+                    class="rounded-full" />
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>person</mat-icon>
+                    <span>แก้ไขโปรไฟล์</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>settings</mat-icon>
+                    <span>ตั้งค่า</span>
+                </button>
+                <button mat-menu-item
+                    (click)="onClickSignout()">
+                    <mat-icon>lock</mat-icon>
+                    <span>ออกจากระบบ</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

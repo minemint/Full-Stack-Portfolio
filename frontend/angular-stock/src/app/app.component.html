@@ -1,0 +1,35 @@
+<mat-sidenav-container autosize>
+
+  @if (isLoggedIn) {
+    <mat-sidenav
+      #sidenav
+      mode="side"
+      opened="isExpanded"
+      [ngStyle]="{ width: isExpanded ? '270px' : '65px' }"
+    style="
+      background-size: cover !important;
+      background: url('../assets/images/bgmenu.jpg') no-repeat center;
+    "
+      >
+      <!-- Menu -->
+      <app-menu
+        [isOpened]="isExpanded"
+        (sidenavToggle)="isExpanded = !isExpanded"
+      ></app-menu>
+    </mat-sidenav>
+  }
+
+  <mat-sidenav-content class="mat-sidenav-content">
+    <!-- Header -->
+    @if (isLoggedIn) {
+      <app-header
+        [isOpened]="isExpanded"
+        (sidenavToggle)="isExpanded = !isExpanded"
+      ></app-header>
+    }
+
+    <!-- Page Content -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

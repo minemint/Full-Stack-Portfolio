@@ -1,0 +1,77 @@
+<mat-nav-list class="container">
+  @if (isOpened) {
+  <img [src]="'assets/images/app_logo.jpg'" alt="" width="100%" />
+  }
+
+  <!-- menu button when collapse -->
+  @if (!isOpened) {
+  <div class="!bg-red-500 h-[64px] flex justify-center items-center">
+    <button
+      aria-labelledby="menu"
+      class="!bg-red-500 !text-white"
+      mat-icon-button
+      (click)="onToggleSidenav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  }
+
+  <div style="height: 8px"></div>
+
+  <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+    <mat-icon>dashboard</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Dashboard</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/stock" routerLinkActive="active">
+    <mat-icon>store</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Stocks</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/event" routerLinkActive="active">
+    <mat-icon>calendar_today</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Events</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/shop" routerLinkActive="active">
+    <mat-icon>shopping_cart</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Orders</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/report" routerLinkActive="active">
+    <mat-icon>pie_chart</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Reports</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/transaction" routerLinkActive="active">
+    <mat-icon>history</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Transactions</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/transaction" routerLinkActive="active">
+    <mat-icon>person</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Users</span>
+    }
+  </a>
+
+  <a mat-list-item routerLink="/settings" routerLinkActive="active">
+    <mat-icon>settings</mat-icon>
+    @if (isOpened) {
+    <span class="nav-caption">Settings</span>
+    }
+  </a>
+</mat-nav-list>

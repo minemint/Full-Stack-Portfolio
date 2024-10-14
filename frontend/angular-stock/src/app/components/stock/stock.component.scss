@@ -1,0 +1,42 @@
+@use "@angular/material" as mat;
+
+.mat-icon {
+  font-size: 50px;
+}
+
+.mat-header-cell {
+  font-size: 20px;
+}
+
+.mat-image-cell {
+  padding: 4px;
+}
+
+.edit-btn {
+  color: white !important;
+  background-color: mat.get-color-from-palette(
+    mat.define-palette(mat.$deep-purple-palette),
+    400
+  ) !important;
+}
+
+.delete-btn {
+  color: white !important;
+  background-color: mat.get-color-from-palette(
+    mat.define-palette(mat.$red-palette),
+    400
+  ) !important;
+}
+
+.add-btn {
+  margin-top: 16px;
+  color: white !important;
+  background-color: mat.get-color-from-palette(
+    mat.define-palette(mat.$pink-palette),
+    400
+  ) !important;
+}
+
+.table-hovor .mat-mdc-row:hover {
+  background-color: #e8e8e8;
+}

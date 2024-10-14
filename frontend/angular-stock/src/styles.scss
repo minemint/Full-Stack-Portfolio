@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Poppins", "Noto Sans Thai", sans-serif; }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container > * {
+  margin-top: 15px;
+  width: 100%;
+}
+
+// Fix blue border in button caused by bs4
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+.mat-mdc-outlined-button {
+  background-color: rgb(255, 235, 235) !important;
+}

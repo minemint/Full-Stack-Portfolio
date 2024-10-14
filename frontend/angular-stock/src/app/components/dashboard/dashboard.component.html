@@ -1,0 +1,48 @@
+<div class="flex flex-row justify-center mt-10">
+    <mat-card class="w-[95%]">
+      <div class="flex flex-row justify-between">
+        <mat-card-header>
+          <mat-card-title>Monthly Sale Report</mat-card-title>
+        </mat-card-header>
+      </div>
+      <mat-card-content>
+        <div style="display: block; width: 100%; height: 40vh;">
+            <canvas baseChart
+                [type]="'bar'"
+                [data]="barChartData"
+                [options]="barChartOptions">
+            </canvas>
+        </div>
+        <mat-card-title class="py-4">Weekly vs Monthly</mat-card-title>
+        <div class="flex flex-row justify-between">
+            <div style="display: block; width: 100%; height: 40vh;">
+                <canvas baseChart
+                    [type]="'line'"
+                    [data]="lineChartData"
+                    [options]="lineChartOptions"
+                    [legend]="lineChartLegend">
+                </canvas>
+            </div>
+
+            <div style="display: block; width: 100%; height: 40vh;">
+                <canvas baseChart
+                    [type]="'doughnut'"
+                    [data]="doughnutChartData"
+                    [options]="doughnutChartOptions">
+                </canvas>
+            </div>          
+        </div>
+
+        <mat-card-title class="py-4">Yearly Overview</mat-card-title>
+        <div style="display: block; width: 100%; height: 40vh;">
+            <canvas baseChart
+                [type]="'scatter'"
+                [data]="scatterChartData"
+                [options]="scatterChartOptions">
+            </canvas>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+</div>
+        

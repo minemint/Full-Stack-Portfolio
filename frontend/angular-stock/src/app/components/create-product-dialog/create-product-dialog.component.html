@@ -1,0 +1,104 @@
+<mat-dialog-content class="mat-typography !pt-6 !pb-6">
+  <div class="flex flex-row justify-center">
+    <div class="w-[95%]">
+      <h3 class="text-black text-center text-2xl">Create a new product</h3>
+      <form [formGroup]="formProduct" (ngSubmit)="onSubmit()">
+        <div class="form-container">
+
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              placeholder="Product name"
+              name="productname"
+              id="productname"
+              maxlength="50"
+              formControlName="productname"
+              required>
+              @if(submitted && formProduct.controls['productname'].errors) {
+                @if(formProduct.controls['productname'].errors['required']) {
+                  <div class="error">ป้อนชื่อสินค้าก่อน</div>
+                }
+                @if(formProduct.controls['productname'].errors['minlength']) {
+                  <div class="error">ความยาวไม่น้อยกว่า 3 ตัวอักษร</div>
+                }
+              }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Price</mat-label>
+            <input
+              matInput
+              placeholder="Price"
+              name="unitprice"
+              id="unitprice"
+              formControlName="unitprice"
+              type="number"
+              required>
+              @if(submitted && formProduct.controls['unitprice'].errors) {
+                @if(formProduct.controls['unitprice'].errors['required']) {
+                  <div class="error">ป้อนราคาก่อน</div>
+                }
+              }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Qty</mat-label>
+            <input matInput placeholder="Quantity" name="unitinstock" id="unitinstock" formControlName="unitinstock"
+              type="number" required>
+            @if(submitted && formProduct.controls['unitinstock'].errors) {
+            @if(formProduct.controls['unitinstock'].errors['required']) {
+            <div class="error">ป้อนจำนวนสินค้าก่อน</div>
+            }
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select placeholder="Category" formControlName="categoryid" required>
+              @for (cat of categories; track cat.value) {
+              <mat-option [value]="cat.value">{{cat.viewValue}}</mat-option>
+              }
+            </mat-select>
+            @if(submitted && formProduct.controls['categoryid'].errors) {
+            @if(formProduct.controls['categoryid'].errors['required']) {
+            <div class="error">เลือกหมวดหมู่ก่อน</div>
+            }
+            }
+          </mat-form-field>
+
+          <!-- Date Picker เจ้าปัญหาของคนไทยทั้งชาติ -->
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="thaidate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <!-- Preview Image with remove button -->
+          <div class="flex flex-row justify-cente relative">
+            @if (imageFile) {
+            <img [src]="imageURL" alt="preview" class="w-full object-cover" />
+
+            <button color="accent" (click)="removeImage()"
+              class="absolute top-4 right-4 bg-white rounded-full w-10 h-10 cursor-pointer">
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+          </div>
+
+          <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+          <input class="ng-hide" id="image" name="image" formControlName="productpicture" type="file"
+            (change)="onChangeImage($event)" />
+
+          <!-- 2 Column -->
+          <div class="flex flex-row justify-center">
+            <button mat-raised-button color="primary"><mat-icon class="!text-sm">save</mat-icon> บันทึก</button>
+            <span>&nbsp;&nbsp;</span>
+            <button mat-raised-button type="button" color="success" (click)="closeDialog()"><mat-icon
+                class="!text-sm">close</mat-icon> ปิด</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>

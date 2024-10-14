@@ -1,0 +1,22 @@
+<div style="width: 350px">
+    @if (data.icon) {
+        <div class="flex w-full justify-center mt-6 h-12">
+            <mat-icon [style.color]="data.iconColor"
+                style="font-size: 64px; height: 64px; width: 64px;">
+                {{ data.icon }}
+            </mat-icon>
+        </div>
+    }
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <div mat-dialog-content
+        class="mat-typography">
+        <h3 class="mat-small">{{ data.subtitle }}</h3>
+    </div>
+    <div mat-dialog-actions
+        align="center"
+        class="!mb-4">
+        <button mat-button
+            (click)="closeDialog()"
+            color="primary">ปิดหน้าต่าง</button>
+    </div>
+</div>

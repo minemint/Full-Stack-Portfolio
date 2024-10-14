@@ -1,0 +1,19 @@
+<div style="width: 400px">
+    <div mat-dialog-content
+        class="mat-typography">
+        <h1 mat-dialog-title>{{ data.title }}</h1>
+        <div mat-dialog-content>
+            <p>Start: {{ data.start | date:'fullDate' }} {{ data.start | date:'shortTime' }}</p>
+            @if(data.end){
+            <p>End: {{ data.end | date:'fullDate' | date:'shortTime' }} {{ data.end | date:'shortTime' }}</p>
+            }
+        </div>
+    </div>
+    <div mat-dialog-actions
+        align="center"
+        class="!mb-4">
+        <button mat-button
+            (click)="closeDialog()"
+            color="primary">ปิดหน้าต่าง</button>
+    </div>
+</div>

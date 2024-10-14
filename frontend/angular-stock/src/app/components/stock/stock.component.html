@@ -1,0 +1,177 @@
+<div class="flex flex-row justify-center mt-10">
+  <mat-card class="w-[95%]">
+    <div class="flex flex-row justify-between">
+      <mat-card-header class="my-2">
+        <mat-card-title
+          >Products ({{ dataSource.data.length }} items)</mat-card-title
+        >
+      </mat-card-header>
+
+      <div>
+        <!-- Add Product Button -->
+        <button
+          mat-raised-button
+          class="mt-4 mr-4 !bg-blue-700 !text-white"
+          (click)="onClickAddProduct()"
+        >
+          <mat-icon class="!text-sm">add</mat-icon> Add Product
+        </button>
+
+        <!-- Export PDF Button -->
+        <button
+          mat-raised-button
+          class="mt-4 mr-4 !bg-red-600 !text-white"
+          (click)="onClickExportPDF()"
+        >
+          <mat-icon class="!text-sm">picture_as_pdf</mat-icon> Export PDF
+        </button>
+
+        <!-- Export CSV Button -->
+        <button
+          mat-raised-button
+          class="mt-4 mr-4 !bg-green-600 !text-white"
+          (click)="onClickExportCSV()"
+        >
+          <mat-icon class="!text-sm">table_chart</mat-icon> Export CSV
+        </button>
+      </div>
+    </div>
+    <mat-card-content>
+      <mat-form-field class="w-full">
+        <input
+          class="w-100"
+          matInput
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="searchValue"
+          (keyup)="doFilter($event)"
+        />
+        @if (searchValue) {
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearSearch()"
+        >
+          <mat-icon class="!text-sm">close</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+
+      <table
+        mat-table
+        #table
+        [dataSource]="dataSource"
+        class="w-full table-hovor"
+        matSort
+        matSortActive="productID"
+        matSortDirection="desc"
+      >
+        <!-- Id -->
+        <ng-container matColumnDef="productID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+          <td mat-cell *matCellDef="let row">{{ row.productid }}</td>
+        </ng-container>
+
+        <!-- Image -->
+        <ng-container matColumnDef="productPicture">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center">
+            รูป
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <img
+              [src]="
+                row.productpicture != 'noimg.jpg'
+                  ? imageUrl + row.productpicture
+                  : 'assets/images/app_logo.jpg'
+              "
+              width="60px"
+              class="rounded-lg mat-image-cell"
+            />
+          </td>
+        </ng-container>
+
+        <!-- Name -->
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อ</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.productname | slice : 0 : 20 }}
+            <!-- @if (row.product_name.length > 20) {
+              ...
+            } -->
+          </td>
+        </ng-container>
+
+        <!-- Price -->
+        <ng-container matColumnDef="unitPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ราคา</th>
+          <td mat-cell *matCellDef="let row">
+            <span style="margin-right: 16px">
+              ฿ {{ row.unitprice | number : "1.2-2" }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Stock -->
+        <ng-container matColumnDef="unitInStock">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>จำนวน</th>
+          <td mat-cell *matCellDef="let row">
+            <span style="margin-right: 16px">
+              {{ row.unitinstock | number }} pcs.
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Category -->
+        <ng-container matColumnDef="categoryName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>หมวดหมู่</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.categoryname }}
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="action">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            style="text-align: center; width: 200px"
+          >
+            จัดการ
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let row"
+            style="text-align: center; width: 200px"
+          >
+            <mat-icon
+              class="!text-2xl text-yellow-700 cursor-pointer"
+              (click)="onClickEdit(row)"
+              >edit</mat-icon
+            >&nbsp;&nbsp;&nbsp;
+
+            <mat-icon
+              class="!text-2xl text-red-700 cursor-pointer"
+              (click)="onClickDelete(row.productid)"
+              >delete</mat-icon
+            >
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <!-- @if (dataSource.data.length === 0) {
+        <div
+          class="flex justify-center mt-5 mat-display-3"
+          >
+          No records found
+        </div>
+      } -->
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

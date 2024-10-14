@@ -1,0 +1,32 @@
+<div style="width: 350px">
+    @if (data.icon) {
+    <div class="flex justify-center w-full h-12 mt-6">
+      <mat-icon [style.color]="data.iconColor"
+        style="font-size: 64px; height: 64px; width: 64px;">
+        {{ data.icon }}
+      </mat-icon>
+    </div>
+    }
+  
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+  
+    <mat-dialog-content class="mat-typography">
+      <h3 class="mat-small">{{ data.subtitle }}</h3>
+    </mat-dialog-content>
+  
+    <div mat-dialog-actions
+      align="center"
+      class="!mb-4">
+      <button mat-button
+        (click)="closeDialog()"
+        color="primary">
+        {{ data.cancelText || 'Cancel' }}
+      </button>
+  
+      <button mat-button
+        (click)="confirmAction()"
+        color="warn">
+        {{ data.confirmText || 'Delete' }}
+      </button>
+    </div>
+</div>
