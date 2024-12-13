@@ -27,8 +27,17 @@ public class CategoryController : ControllerBase
     [HttpGet]
     public ActionResult<Category> GetCategories()
     {
-        var categories = _context.categories.ToList();
-        return Ok(categories);
+        try
+        {
+            var categories = _context.categories.ToList();
+            return Ok(categories);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
     }
 
     // GET /api/Category/1
@@ -46,6 +55,7 @@ public class CategoryController : ControllerBase
     }
 
     // POST /api/Category
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult<Category> AddCategory([FromBody] Category category)
     {
@@ -57,6 +67,7 @@ public class CategoryController : ControllerBase
     }
 
     // PUT /api/Category/1
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public ActionResult<Category> UpdateCategory(int id, [FromBody] Category category)
     {
@@ -76,6 +87,7 @@ public class CategoryController : ControllerBase
     }
 
     // DELETE /api/Category/1
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public ActionResult<Category> DeleteCategory(int id)
     {

@@ -3,9 +3,9 @@
         class="mat-typography">
         <h1 mat-dialog-title>{{ data.title }}</h1>
         <div mat-dialog-content>
-            <p>Start: {{ data.start | date:'fullDate' }} {{ data.start | date:'shortTime' }}</p>
-            @if(data.end){
-            <p>End: {{ data.end | date:'fullDate' | date:'shortTime' }} {{ data.end | date:'shortTime' }}</p>
+            <p>Start: {{ data.start | date:'fullDate' }} {{ data.start_date | date:'shortTime' }}</p>
+            @if(data.end_date){
+            <p>End: {{ data.end_date | date:'fullDate' | date:'shortTime' }} {{ data.end_date | date:'shortTime' }}</p>
             }
         </div>
     </div>

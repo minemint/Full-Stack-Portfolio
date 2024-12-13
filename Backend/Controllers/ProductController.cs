@@ -15,13 +15,15 @@ namespace DotnetStockAPI.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
+    
+    //env
     private readonly IWebHostEnvironment _env;
 
     // ฟังก์ชันสร้าง Constructor รับค่า ApplicationDbContext
     public ProductController(ApplicationDbContext context, IWebHostEnvironment env)
     {
         _context = context;
+        //env
         _env = env;
     }
 
@@ -117,6 +119,7 @@ public class ProductController : ControllerBase
     }
 
     // POST: /api/Product
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<Product>> CreateProduct([FromForm] Product product, IFormFile? image)
     {
@@ -152,6 +155,7 @@ public class ProductController : ControllerBase
     }
 
     // PUT: /api/Product/1
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] Product product, IFormFile? image)
     {
@@ -199,6 +203,7 @@ public class ProductController : ControllerBase
     }
 
     // DELETE /api/Product/1
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public ActionResult<Product> DeleteProduct(int id)
     {

@@ -19,26 +19,26 @@ import { AuthService } from '../../services/auth.service'
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component'
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss',
-    standalone: true,
-    imports: [
-        MatCard,
-        MatCardImage,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatIcon,
-        MatSuffix,
-        MatIconButton,
-        MatCardActions,
-        MatButton,
-        ReactiveFormsModule
-    ],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardImage,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatIcon,
+    MatSuffix,
+    MatIconButton,
+    MatCardActions,
+    MatButton,
+    ReactiveFormsModule
+  ],
 })
 export class LoginComponent implements OnInit {
 
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
               },
               disableClose: true,
             })
-            
+
             // เก็บค่าลงตัวแปร userLogin
             this.userLogin = {
               "username": data.userData.userName,

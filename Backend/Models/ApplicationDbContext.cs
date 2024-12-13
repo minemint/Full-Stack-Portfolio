@@ -13,7 +13,7 @@ public partial class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
     }
     public virtual DbSet<Category> categories { get; set; }
-
+    public virtual DbSet<Event> events { get; set; }
     public virtual DbSet<Product> products { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,6 +37,10 @@ public partial class ApplicationDbContext : IdentityDbContext<IdentityUser>
         modelBuilder.Entity<IdentityRole>(entity =>
         {
             entity.HasKey(e => e.Id);
+        });
+        modelBuilder.Entity<Event>(entity =>
+        {
+            entity.ToTable("event");
         });
         modelBuilder.Entity<Category>(entity =>
         {

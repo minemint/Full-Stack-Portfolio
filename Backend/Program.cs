@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Text;
 using DotnetStockAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -5,13 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore.SqlServer;
 
     var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection2"));
 });
 
 
@@ -59,9 +59,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(
     options =>
-    {
+    {   
         options.SupportNonNullableReferenceTypes();
-        options.SwaggerDoc("v1", new() { Title = "Stock API with .NET 8 and PostgreSQL", Version = "v1" });
+        options.SwaggerDoc("v2", new() { Title = "Stock API with .NET 8 and PostgreSQL", Version = "2" });
 
         options.AddSecurityDefinition("Bearer",  new OpenApiSecurityScheme()
         {
@@ -95,7 +95,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) 
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Stock API v2");
+        c.RoutePrefix = string.Empty;  // เปิด Swagger UI ที่หน้าแรก
+    });
 }
 
 app.UseStaticFiles();

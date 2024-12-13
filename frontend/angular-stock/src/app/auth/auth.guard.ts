@@ -1,48 +1,25 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from './../services/auth.service';
+import { inject } from '@angular/core'
+import { CanActivateFn, Router } from '@angular/router'
+import { AuthService } from './../services/auth.service'
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const auth = inject(AuthService);
 
-  if (auth.isLoggedIn()) {
+  const router = inject(Router)
+  const auth = inject(AuthService)
+
+  // ถ้า login แล้วให้ไปหน้าที่ต้องการ
+  if(auth.isLoggedIn()){
     if (state.url == '/login' || state.url == '/register') {
-      router.navigate(['dashboard']);
+      router.navigate(['dashboard'])
     }
-    return true;
-  } else {
-    if (state.url != '/login' && state.url != '/register') {
-      router.navigate(['login']);
-    }
-    return true;
+    return true
   }
-};
-
-export const AdminauthGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const auth = inject(AuthService);
-
-  if (auth.isAdmin()) {
-    switch (state.url) {
-      case '/login':
-      case '/register':
-        router.navigate(['dashboard']);
-        break;
-      case '/Stock':
-        router.navigate(['admin-dashboard']);
-        break;
-      case '/Event':
-        router.navigate(['admin-settings']);
-        break;
-      default:
-        router.navigate(['dashboard']);
-    }
-    return true;
-  } else {
+  // ถ้ายังไม่ login ให้ไปหน้า login
+  else{
     if (state.url != '/login' && state.url != '/register') {
-      router.navigate(['login']);
+      router.navigate(['login'])
     }
-    return true;
+    return true
   }
-};
+
+}

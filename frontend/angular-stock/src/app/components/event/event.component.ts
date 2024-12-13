@@ -82,8 +82,8 @@ export class EventComponent implements OnInit {
         this.calendarOptions.events = data.map((event: any) => {
           return {
             title: event.title,
-            start: event.start,
-            end: event.end
+            start: event.start_date,
+            end: event.end_date
           }
         })
       },
@@ -97,8 +97,8 @@ export class EventComponent implements OnInit {
     this.dialog.open(EventDialogComponent, {
       data: {
         title: arg.event.title,
-        start: arg.event.start,
-        end: arg.event.end
+        start: arg.event.start_date,
+        end: arg.event.end_date
       }
     })
   }
